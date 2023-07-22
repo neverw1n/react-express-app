@@ -1,26 +1,27 @@
-const { STRING } = require('sequelize');
-const { INTEGER } = require('sequelize');
-const sequelize = require('../settings/db');
+const { STRING } = require("sequelize");
+const { INTEGER } = require("sequelize");
+const { TEXT } = require("sequelize");
+const sequelize = require("../settings/db");
 
 const Articles = sequelize.define("Articles", {
   ArticleID: {
     type: INTEGER,
     autoIncrement: true,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
   },
   UserID: {
     type: INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   ArticleName: {
     type: STRING,
-    allowNull: false
+    allowNull: false,
   },
   ArticleText: {
-    type: STRING,
-    allowNull: false
-  }
+    type: TEXT("long"),
+    allowNull: false,
+  },
 });
 
 module.exports = Articles;

@@ -1,46 +1,42 @@
-const User = require('./../models/users');
+const User = require("./../models/users");
 
-
-exports.getUsers = function(req, res){
-  User.findAll().then(data => {
-    if (Object.keys(data).length === 0) {
-      return res.status(204).send({
-        message: "No Content"
+exports.getUsers = function (req, res) {
+  User.findAll()
+    .then((data) => {
+      if (Object.keys(data).length === 0) {
+        return res.status(204).send({
+          message: "No Content",
+        });
+      } else {
+        res.send(data);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Internal Server Error",
       });
-    } else {
-      res.send(data);
-    }
-  })
-  .catch(err => {
-    res.status(500).send({
-      message: "Internal Server Error"
     });
-  });
 };
 
-exports.getUserByID = function(req, res){
+exports.getUserByID = function (req, res) {
   const id = req.params.id;
 
   User.findByPk(id)
-    .then(data => {
+    .then((data) => {
       if (data) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Not Found`
+          message: `Not Found`,
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: "Internal Server Error"
+        message: "Internal Server Error",
       });
     });
 };
-
-
-
-
 
 // const db = require('./../db');
 
